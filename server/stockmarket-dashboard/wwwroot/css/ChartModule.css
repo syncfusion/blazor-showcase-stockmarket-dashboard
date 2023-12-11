@@ -20,7 +20,7 @@
 }
 
 .e-stockchart-select::before {
-    content: '\e718';
+    content: '\e774' !important;
 }
 
 .e-dlg-overlay {
