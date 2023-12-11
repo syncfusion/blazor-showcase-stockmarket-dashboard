@@ -1,0 +1,119 @@
+﻿@namespace StockMarket.Pages
+@inject TechnicalService TechnicalsService
+
+
+<div class="headtitle">
+    <span><b>Technicals</b></span>
+</div>
+<div class="circulargauge">
+    <SfCircularGauge  Background="transparent" Height="100%"  CenterX="55%" CenterY="65%">
+        <CircularGaugeAxes>
+            <CircularGaugeAxis EndAngle="95" StartAngle="270" Minimum="0" Maximum="100" Radius="100%">
+                <CircularGaugeAxisLineStyle Width="0" Color="rgba(229, 231, 235, 1)" />
+                <CircularGaugeAxisLabelStyle>
+                    <CircularGaugeAxisLabelFont Size="0px" FontFamily="Inter" />
+                </CircularGaugeAxisLabelStyle>
+                <CircularGaugeAxisMajorTicks Height="0" />
+                <CircularGaugeAxisMinorTicks Height="0" />
+                <CircularGaugeRanges>
+                    <CircularGaugeRange Start="0" End="100" Radius="90%" StartWidth="12" EndWidth="12" Color="rgba(229, 231, 235, 1)" RoundedCornerRadius="5" />
+                </CircularGaugeRanges>
+                <CircularGaugeAnnotations>
+                    <CircularGaugeAnnotation Radius="-20%" Angle="0" ZIndex="1">
+                        <ContentTemplate>
+                            <div><span class="templateText" style="color: rgba(28, 25, 23, 1); font-size: 16px; font-family: Inter; font-weight: 600; line-height: 15px; align-content: center;">@content</span></div>
+                        </ContentTemplate>
+                    </CircularGaugeAnnotation>
+                    <CircularGaugeAnnotation Angle="-85" Radius="120%" ZIndex="1">
+                        <ContentTemplate>
+                            <div><span class="templateText" style="color: rgba(106, 106, 106, 1); font-size: 12px; font-family: Inter; font-weight: 400; line-height: 15px; align-content: center;">Strong<br />&nbsp;&nbsp;&nbsp;Sell</span></div>
+                        </ContentTemplate>
+                    </CircularGaugeAnnotation>
+                    <CircularGaugeAnnotation Angle="-40" Radius="105%" ZIndex="1">
+                        <ContentTemplate>
+                            <div><span class="templateText" style="color: rgba(106, 106, 106, 1); font-size: 12px; font-family: Inter; font-weight: 400; line-height: 15px; align-content: center;"> Sell</span></div>
+                        </ContentTemplate>
+                    </CircularGaugeAnnotation>
+                    <CircularGaugeAnnotation Radius="105%" Angle="0" ZIndex="1">
+                        <ContentTemplate>
+                            <div><span class="templateText" style="color: rgba(106, 106, 106, 1); font-size: 12px; font-family: Inter; font-weight: 400; line-height: 15px; align-content: center;">Neutral</span></div>
+                        </ContentTemplate>
+                    </CircularGaugeAnnotation>
+                    <CircularGaugeAnnotation Radius="105%" Angle="40" ZIndex="1">
+                        <ContentTemplate>
+                            <div><span class="templateText" style="color: rgba(106, 106, 106, 1); font-size: 12px; font-family: Inter; font-weight: 400; line-height: 15px; align-content: center;">Buy</span></div>
+                        </ContentTemplate>
+                    </CircularGaugeAnnotation>
+                    <CircularGaugeAnnotation Radius="120%" Angle="85" ZIndex="1">
+                        <ContentTemplate>
+                            <div><span class="templateText" style="color: rgba(106, 106, 106, 1); font-size: 12px; font-family: Inter; font-weight: 400; line-height: 15px; align-content: center;">Strong<br />&nbsp;&nbsp;&nbsp;Buy</span></div>
+                        </ContentTemplate>
+                    </CircularGaugeAnnotation>
+                </CircularGaugeAnnotations>
+                <CircularGaugePointers>
+                    <CircularGaugePointer Value="@PointerValue" RoundedCornerRadius="0" Type="PointerType.RangeBar" Radius="90%" Color="@rangeColor" PointerWidth="12">
+                        <CircularGaugePointerAnimation Enable="false" />
+                        <CircularGaugePointerBorder Width="0" />
+                    </CircularGaugePointer>
+                    <CircularGaugePointer Value="@PointerValue" Radius="70%" NeedleStartWidth="4" NeedleEndWidth="1" PointerWidth="2" Color="rgba(108, 117, 125, 1)">
+                        <CircularGaugePointerAnimation Enable="false" />
+                        <CircularGaugeCap Radius="6" Color="rgba(108, 117, 125, 1)" />
+                    </CircularGaugePointer>
+                </CircularGaugePointers>
+            </CircularGaugeAxis>
+        </CircularGaugeAxes>
+    </SfCircularGauge>
+</div>
+
+
+@code
+{
+    [Parameter]
+    public double PointerValue { get; set; }
+    private string rangeColor { get; set; }
+    private string content = "Sell";
+
+    protected override void OnInitialized()
+    {
+        UpdateStockProgress();
+    }
+
+    public void TechRefresh()
+    {
+        PointerValue = TechnicalsService.GetStockProgress();
+        UpdateStockProgress();
+        StateHasChanged();
+    }
+
+    public void UpdateStockProgress()
+    {
+        if (PointerValue < 25)
+        {
+            content = "Strong Sell";
+            rangeColor = "#FFA500";
+        }
+        else if (PointerValue >= 25 && PointerValue < 45)
+        {
+            content = "Sell";
+            rangeColor = "rgba(225, 29, 72, 1)";
+        }
+        else if (PointerValue >= 45 && PointerValue < 70)
+        {
+            content = "Neutral";
+            rangeColor = "#FFE933";
+        }
+        else if (PointerValue >= 70 && PointerValue < 90)
+        {
+            content = "Buy";
+            rangeColor = "#3355FF";
+        }
+        else if (PointerValue >= 90)
+        {
+            content = "Strong Buy";
+            rangeColor = "#1FA435";
+        }
+    }
+}
+
+
+

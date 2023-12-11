@@ -1,0 +1,41 @@
+﻿.subtext {
+    color: #6A6A6A;
+    font-weight: 400;
+    font-size: 8px; /* You can adjust the font size as well */
+}
+
+.tile {
+    width: 25%;
+    height: 40%;
+    margin-bottom: 3%;
+}
+
+.content-tile {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.value-tile {
+    font-size: 20px;
+    font-weight: 400;
+}
+.key {
+    margin-left: 1%;
+    margin-top: 1%;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    width: 30%;
+    height: 20%;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
