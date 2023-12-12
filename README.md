@@ -41,7 +41,7 @@ Make sure you have the following installed on your machine:
 
 ## Output
 
-![StockMarket Dashboard App](./StockMarket%20Dashboard%20App.jpeg)
+![StockMarket Dashboard App](https://github.com/syncfusion/blazor-showcase-stockmarket-dashboard/assets/28931274/35b72fc2-353e-4356-b356-f9fc4852552c)
 
 
 ## Additional Information
