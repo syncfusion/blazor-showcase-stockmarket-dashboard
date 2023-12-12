@@ -41,7 +41,7 @@ Make sure you have the following installed on your machine:
 
 ## Output
 
-![StockMarket Dashboard App](<StockMarket Dashboard App.jpeg>)
+![StockMarket Dashboard App](./StockMarket%20Dashboard%20App.jpeg)
 
 
 ## Additional Information
