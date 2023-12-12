@@ -1,6 +1,6 @@
 # Stockmarket Dashboard App
 
-Welcome to the Stockmarket Dashboard app! This guide will help you get started with building and running the application.
+This stock market dashboard demo application exemplifies the seamless integration of various Syncfusion Blazor UI components within a real-world application scenario. The demonstration focuses on presenting dynamic stock prices for different companies, offering a comprehensive showcase of the capabilities and functionalities of these components.
 
 ## Prerequisites
 
