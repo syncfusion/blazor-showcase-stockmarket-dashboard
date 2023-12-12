@@ -41,12 +41,12 @@ Make sure you have the following installed on your machine:
 
 ## Output
 
-![temp](https://github.com/essential-studio/blazor-showcase-stockmarket-dashboard/assets/28931274/582999ae-00d8-467e-84d2-63bbaa0b7c1e)
+![StockMarket Dashboard App](<StockMarket Dashboard App.jpeg>)
 
 
 ## Additional Information
 
-- If you encounter any issues or have questions, please check the [issue tracker](https://github.com/essential-studio/blazor-showcase-stockmarket-dashboard/issues) or create a new issue.
+- If you encounter any issues or have questions, please check the [issue tracker](https://github.com/syncfusion/blazor-showcase-stockmarket-dashboard/issues) or create a new issue.
 
 - For more advanced configurations or deployment options, refer to the [official Blazor documentation](https://docs.microsoft.com/en-us/aspnet/core/blazor).
 
