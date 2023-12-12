@@ -1,0 +1,67 @@
+﻿.MainContainer {
+    height: 100%;
+}
+
+.performance-tile-parent {
+    margin-top: 8%;
+    height: 72%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.gaugeFourFirstText {
+    color: #6acc72;
+    font-weight: 600;
+}
+.performance-tile {
+    border-radius: 8px;
+    width: 30.5%;
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.performance-change-tile {
+    margin-bottom: 2%;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0.01em;
+    text-align: center;
+}
+
+.performance-period-tile {
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17.5px;
+    letter-spacing: 0.01em;
+    text-align: center;
+}
+
+.perform-title {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+.green {
+    color: #059669;
+    background-color: #E4FFF6;
+}
+
+.red {
+    color: #E11D48;
+    background-color: #FFEFEF;
+}

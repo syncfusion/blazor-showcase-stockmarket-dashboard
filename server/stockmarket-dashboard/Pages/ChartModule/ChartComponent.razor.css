@@ -1,0 +1,10 @@
+﻿#stockchart_stockChart_rangeSelector_rightUnSelectedArea, #stockchart_stockChart_rangeSelector_leftUnSelectedArea{
+    pointer-events: none;
+}
+#stockchart_stockChart_rangeSelector_SelectedArea {
+    fill: #6528F7;
+    opacity: 0.2;
+}
+#stockchart_stockChart_rangeSelector_Series_Series{
+    stroke-width: 3px !important;
+}

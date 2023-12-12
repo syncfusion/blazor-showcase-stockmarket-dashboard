@@ -1,0 +1,426 @@
+﻿@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+@using StockMarket.Data
+@using Syncfusion.Blazor.Layouts
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Charts
+@using Syncfusion.Blazor.Lists
+@inject CardService CardService
+@inject WatchListService WatchListService
+@inject ChartService ChartService
+
+
+<SfDashboardLayout CellSpacing="@(new double[]{10 ,10 })" CellAspectRatio="1.5" Columns="5">
+    <DashboardLayoutPanels>
+        <DashboardLayoutPanel SizeX=4 Column="0" Row="0">
+            <ContentTemplate>
+                <div style="display: flex;">
+                    <span class="e-avatar e-avatar-circle custom-avatar"> <img class="logo" src="css/images/stock-market.png" alt="Healthstat" /> </span>
+                    <select id="stock-dropdown" @onchange="HandleStockSelection">
+                        <option value="US Stocks">US Stocks</option>
+                        <option value="Indices">Indices</option>
+                        <option value="Stocks">Stocks</option>
+                        <option value="Futures">Futures</option>
+                        <option value="Forex">Forex</option>
+                        <option value="Crypto">Crypto</option>
+                    </select>
+                </div>
+
+                <div class="control-container">
+                    <SfCarousel>
+                        <ChildContent>
+                            <CarouselItem>
+                                <div class="card-container">
+                                    @{
+                                        var selectedValues = CardData.TryGetValue(selectedStockType, out List<CardData> cardList);
+
+                                        if (selectedValues)
+                                        {
+                                            for (int i = 0; i < 5; i++)
+                                            {
+                                                var upDownPriceClass = @cardList[i].UpDownPrice >= 0 ? "positive" : "negative";
+                                                <div class="stock-card">
+                                                    <div class="stock-image-container">
+                                                        <img src="@cardList[i].StockSymbol" alt="Stock Image" class="stock-image">
+                                                    </div>
+                                                    <div class="stock-details">
+                                                        <div class="stock-name">@cardList[i].StockName <span class="active-dot">•</span> </div>
+                                                        <div class="price-change">
+                                                            <div class="stock-price">
+                                                                @cardList[i].StockCurrentPrice
+                                                                <span class="currency">USD</span>
+                                                                <span class="up-down-price @upDownPriceClass">
+                                                                    @if (@cardList[i].UpDownPrice >= 0)
+                                                                    {
+                                                                        <span class="plus">+</span>
+                                                                    }
+                                                                    @cardList[i].UpDownPrice
+                                                                </span>
+                                                            </div>                                                         
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            for (int i = 0; i < 5; i++)
+                                            {
+                                                <div class="stock-card">
+                                                    <div class="stock-name">@CardData.ElementAt(i).Key</div>
+                                                </div>
+                                            }
+                                            
+                                        }
+                                    }
+                                </div>
+                            </CarouselItem>
+                            <CarouselItem>
+                                <div class="card-container">
+                                    @{
+                                        var selectedValues = CardData.TryGetValue(selectedStockType, out List<CardData> cardList);
+                                        if (selectedValues)
+                                        {
+                                            for (int i = 5; i < 9; i++)
+                                            {
+                                                var upDownPriceClass = @cardList[i].UpDownPrice >= 0 ? "positive" : "negative";
+                                                <div class="stock-card">
+                                                    <div class="stock-image-container">
+                                                        <img src="@cardList[i].StockSymbol" alt="Stock Image" class="stock-image">
+                                                    </div>
+                                                    <div class="stock-details">
+                                                        <div class="stock-name">@cardList[i].StockName  <span class="active-dot">•</span> </div>
+                                                        <div class="price-change">
+                                                            <div class="stock-price">
+                                                                @cardList[i].StockCurrentPrice
+                                                                <span class="currency">USD</span>
+                                                                <span class="up-down-price @upDownPriceClass">
+                                                                    @if (@cardList[i].UpDownPrice >= 0)
+                                                                    {
+                                                                        <span class="plus">+</span>
+                                                                    }
+                                                                    @cardList[i].UpDownPrice
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </CarouselItem>
+                        </ChildContent>
+                        <NextButtonTemplate>
+                            <SfButton CssClass="e-flat e-outline nav-btn" title="Next">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
+                                    <path d="m13.5 7.01 13 13m-13 13 13-13"></path>
+                                </svg>
+                            </SfButton>
+                        </NextButtonTemplate>
+
+                    </SfCarousel>
+                </div>
+            </ContentTemplate>
+        </DashboardLayoutPanel>
+        <DashboardLayoutPanel SizeX="1" SizeY="2" Column="5" Row="0">
+            <ContentTemplate>
+                <div class="control-section">
+                    <!-- Listview element -->
+                    <SfListView Height="424px" DataSource="@CardDatas" HeaderTitle="StockType" ShowHeader=true SortOrder="Syncfusion.Blazor.Lists.SortOrder.Ascending">
+                        <ListViewFieldSettings TValue="CardData" GroupBy="StockType" Text="StockName"></ListViewFieldSettings>
+                        <ListViewTemplates TValue="CardData">
+                            <Template>
+                                <div class="listWrapper">
+                                    <span class="pic e-avatar e-avatar-small e-avatar-circle"> </span>
+                                    <span class="list-text">@context.StockName</span>
+                                </div>
+                            </Template>
+                            <GroupTemplate>
+                                <div class="e-list-wrapper">
+                                    <span class="e-list-item-content">@context.Text</span>
+                                </div>
+                            </GroupTemplate>
+                        </ListViewTemplates>
+                    </SfListView>
+                </div>
+            </ContentTemplate>
+        </DashboardLayoutPanel>
+        <DashboardLayoutPanel SizeX="4" SizeY="3" Column="0" Row="2">
+            <ContentTemplate>
+                <SfStockChart EnableSelector="false" EnablePeriodSelector="false" EnableCustomRange="false"  TrendlineType="@TrendlineType" IndicatorType="@Indicator" SeriesType="@SeriesType">
+                    <StockChartSeriesCollection>
+                        <StockChartSeries DataSource="@ChartDatas" Type="Syncfusion.Blazor.Charts.ChartSeriesType.Candle" XName="X" High="High" Low="Low" Open="Open" Close="Close" Volume="Volume" Name="Google"></StockChartSeries>
+                    </StockChartSeriesCollection>
+                </SfStockChart>
+            </ContentTemplate>
+        </DashboardLayoutPanel>
+        <DashboardLayoutPanel SizeX="1" SizeY="2" Column="5" Row="3">
+
+        </DashboardLayoutPanel>
+    </DashboardLayoutPanels>
+</SfDashboardLayout>
+
+
+
+<style>
+
+      /*list view style*/
+
+    .pic{
+        background-image: url('css/images/AAPL.png');
+    }
+    .control-section {
+        overflow: auto;
+    }
+    /* Listview Customization */
+    .e-control.e-listview {
+        max-width: 350px;
+        margin: auto;
+        border-radius: 3px;
+    }
+
+        /* Badge Positioning */
+        .e-control.e-listview .e-badge {
+            margin-top: 12px;
+        }
+
+        .e-control.e-listview .listWrapper .list-text {
+            width: 60%;
+            display: inline-block;
+            vertical-align: middle;
+            margin: auto 50px auto 20px;
+        }
+        /* Avatar Positioning */
+        .e-control.e-listview .listWrapper .e-avatar {
+            font-size: 10px;
+            margin: auto 0;
+            left: 5px;
+        }
+
+        .e-control.e-listview .listWrapper {
+            width: inherit;
+            height: inherit;
+            position: relative;
+            display: flex;
+        }
+
+        .e-control.e-listview .e-list-header {
+            height: 54px;
+        }
+
+
+         .active-dot{
+             color:orange;
+         }
+
+        .up-down-price {
+            font-weight: bold;
+            font-size: 10px; /* Make the text bold */
+        }
+
+        .plus{
+            color: green;
+        }
+
+        .up-down-price.positive {
+            font-weight: bold;
+            color: green;
+            font-size: 14px; /* Green color for positive values */
+        }
+
+        .up-down-price.negative {
+            font-weight: bold;
+            color: red;
+            font-size: 14px; /* Red color for negative values */
+        }
+
+    .currency{
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 13px;
+        margin-right: 5px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+    
+    .stock-price{
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .stock-image-container {
+        flex: 0 0 auto; /* Don't let the image grow or shrink */
+        margin-right: 10px; /* Add spacing between the image and details */
+    }
+
+    .stock-image {
+        width: 50px;
+        height: 50px;
+        top: 264px;
+        left: 20px;
+        border-radius: 50px;
+    }
+
+    #stock-dropdown {
+        border: none;
+        margin: 0.3% 0.5% 0;
+        font-weight: 600;
+        font-size: 18px;
+        color: #1A1A1A;
+    }
+
+
+    .add-symbol-button {
+        font-size:15px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 5px;
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+
+    .watch-list-title{
+        font-size: 20px;
+    }
+/*     .card {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border-radius: 10px; 
+    } */
+
+    .card-container {
+        display: flex;
+    }
+
+    .e-carousel .e-carousel-navigators .e-btn:active,
+    .e-carousel .e-carousel-navigators .e-btn:hover {
+        background-color: transparent !important;
+        color: #6c757d;
+    }
+
+    .e-carousel .e-carousel-navigators .e-btn svg {
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: square;
+        stroke-width: 8px;
+        height: 2rem;
+        vertical-align: middle;
+        width: 2rem;
+    }
+
+    .e-carousel .slide-content {
+        align-items: center;
+        display: flex;
+        font-size: 1.25rem;
+        height: 100%;
+        justify-content: center;
+    }
+
+
+    .stock-card {
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 220px;
+        margin: 10px;
+        display: flex; /* Use flexbox for horizontal alignment */
+        align-items: center;
+        border-radius: 10px;
+    }
+
+    .stock-name {
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .stock-details {
+        flex: 1; /* Allow details to grow and take up available space */
+    }
+
+    .price-change {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .price-color.Green {
+        color: green;
+    }
+
+    .price-color.Red {
+        color: red;
+    }
+
+    .active-hour-color {
+        height: 10px;
+        width: 100%;
+    }
+
+        .active-hour-color.Green {
+            background-color: green;
+        }
+
+        .active-hour-color.Red {
+            background-color: red;
+        }
+</style>
+
+@code{
+
+    private string selectedStockType = "US Stocks";
+
+    public DialogSettings DialogParams = new DialogSettings { MinHeight = "400px", Width = "450px" };
+
+    public List<ChartData> ChartDatas { get; set; } = new List<ChartData>();
+
+    public List<CardData> CardDatas = new List<CardData>();
+
+    public Dictionary<string, List<CardData>> CardData { get; set; } = new Dictionary<string, List<CardData>>();
+
+    public List<WatchListData> watchListDatas = new List<WatchListData>();
+
+    public List<TrendlineTypes> TrendlineType = new List<TrendlineTypes>();
+    public List<TechnicalIndicators> Indicator = new List<TechnicalIndicators>();
+    public List<ChartSeriesType> SeriesType = new List<ChartSeriesType>();
+
+    // List<DataModel> DataSource = new List<DataModel>()
+    // {
+    //     new DataModel { id= "s_01", text= "Robert", avatar= "", pic= "pic04"},
+    //     new DataModel { id= "s_02", text= "Nancy", avatar= "N", pic= ""},
+    //     new DataModel { id= "s_03", text= "John", avatar= "", pic= "pic01"},
+    //     new DataModel { id= "s_05", text= "Andrew", avatar= "A", pic= ""},
+    //     new DataModel { id= "s_06", text= "Margaret", avatar= "", pic= "pic02"},
+    //     new DataModel { id= "s_07", text= "Steven", avatar= "", pic= "pic03" },
+    //     new DataModel { id= "s_08", text= "Michael", avatar= "M", pic= ""},
+    // };
+    // // Specifies the model class for ListView datasource.
+    // class DataModel
+    // {
+    //     public string id { get; set; }
+    //     public string text { get; set; }
+    //     public string avatar { get; set; }
+    //     public string pic { get; set; }
+    // }
+
+
+    protected override void OnInitialized()
+    {
+        CardData = CardService.GetData();
+        CardDatas = CardData.Values.SelectMany(x => x).ToList();
+        watchListDatas = WatchListService.GetWatchListDatas();
+        ChartDatas = ChartService.GenerateSimulatedStockData();
+    }
+
+    private void HandleStockSelection(Microsoft.AspNetCore.Components.ChangeEventArgs eventArgs)
+    {
+        selectedStockType = eventArgs.Value.ToString();
+        StateHasChanged();
+    }
+}

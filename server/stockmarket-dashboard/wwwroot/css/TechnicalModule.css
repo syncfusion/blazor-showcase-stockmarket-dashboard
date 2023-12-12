@@ -1,0 +1,20 @@
+﻿div[id*="_Axis_0_Annotation"] {
+    line-height: 15px;
+}
+
+.circulargauge {
+    height: 100%;
+    width: 90%;
+}
+
+.headtitle {
+    height: 10%;
+    margin-top: 1%;
+    margin-left: 1%;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+}

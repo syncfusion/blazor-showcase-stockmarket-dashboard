@@ -1,0 +1,46 @@
+﻿<PageTitle>Stock Market Dashboard</PageTitle>
+<CascadingValue Value="this">
+    <div class="stockmarket-container">
+        <div class="column-20">
+            <div class="watchlist-module">
+                <WatchlistComponent></WatchlistComponent>
+            </div>
+        </div>
+        <div class="column-80">
+            <div class="chart-common-module">
+                <ChartComponent @ref="chartComponent"></ChartComponent>
+            </div>
+            <div class="keystats-common-module">
+                <KeyStatisticsComponent @ref="keyStatisticsComponent"></KeyStatisticsComponent>
+            </div>
+            <div class="techinfo">
+                <div class="total-perform total-common-module">
+                    <TotalPerfomanceComponent @ref="totalPerfomanceComponent"></TotalPerfomanceComponent>
+                </div>
+                <div class="technical tech-common-module">
+                    <TechnicalsComponent @ref="technicalsComponent" PointerValue="@PointerValue"></TechnicalsComponent>
+                </div>
+            </div>
+        </div>
+    </div>
+</CascadingValue>
+
+
+@code {
+    public KeyStatisticsComponent keyStatisticsComponent;
+    public ChartComponent chartComponent;
+    public TotalPerfomanceComponent totalPerfomanceComponent;
+    public TechnicalsComponent technicalsComponent;
+
+    public double PointerValue { get; set; } = 95;
+
+    public void Rerender()
+    {
+        chartComponent.ChartRefresh();
+        keyStatisticsComponent.KeyStatsRefresh();
+        totalPerfomanceComponent.PerformanceRefresh();
+        technicalsComponent.TechRefresh();
+    }
+}
+
+
