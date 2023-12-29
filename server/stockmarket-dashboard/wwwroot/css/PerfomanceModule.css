@@ -65,3 +65,142 @@
     color: #E11D48;
     background-color: #FFEFEF;
 }
+
+
+@media only screen and (max-width: 719px) {
+    /* Styles for mobile layouts */
+
+    .MainContainer {
+        height: 100%;
+        padding-top: 2%;
+    }
+
+    .total-perform {
+        width: auto;
+        margin: 0.6% 2% 2% 2%;
+    }
+
+    .performance-tile-parent {
+        margin-top: 2%;
+        height: 72%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .performance-tile {
+        border-radius: 8px;
+        width: 46.5%;
+        height: 45%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+    .perform-title {
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20px;
+        letter-spacing: 0em;
+        text-align: left;
+        margin-left: 3%;
+        margin-top: 1%;
+    }
+
+    .performance-change-tile {
+        margin-bottom: 2%;
+        margin-top: 2%;
+        font-family: Inter;
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 30px;
+        letter-spacing: 0.01em;
+        text-align: center;
+    }
+
+    .performance-period-tile {
+        font-family: Inter;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 17.5px;
+        letter-spacing: 0.01em;
+        text-align: center;
+        margin-bottom: 5%;
+        margin-top: 2%;
+    }
+}
+
+@media only screen and (min-width: 720px) and (max-width: 1024px) {
+    /* Styles for iPad Mini, ipad Air, Surface Pro 7 (example) */
+
+    .MainContainer {
+        height: 100%;
+        padding-top: 2%;
+    }
+
+    .total-perform {
+        width: auto;
+        margin: 0.6% 2% 2% 2%;
+    }
+
+    .performance-tile-parent {
+        margin-top: 2%;
+        height: 72%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .performance-tile {
+        border-radius: 8px;
+        width: 30.5%;
+        height: 45%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+    .perform-title {
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20px;
+        letter-spacing: 0em;
+        text-align: left;
+        margin-left: 2%;
+        margin-top: 1%;
+    }
+
+    .performance-change-tile {
+        margin-bottom: 2%;
+        margin-top: 2%;
+        font-family: Inter;
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 30px;
+        letter-spacing: 0.01em;
+        text-align: center;
+    }
+
+    .performance-period-tile {
+        font-family: Inter;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 17.5px;
+        letter-spacing: 0.01em;
+        text-align: center;
+        margin-bottom: 5%;
+        margin-top: 2%;
+    }
+}

@@ -14,12 +14,26 @@
         <div class="title">
             <span class="title1">Pure</span><span class="title2">Stocks</span>
         </div>
+        @if (ShouldRenderWatchList && Parent.isTab)
+        {
+            <input class="search-div search-div-tab" type="text" placeholder="Search" @oninput="UpdateFilteredItems">
+        }
     </div>
-
-    <input class="search-div" type="text" placeholder="Search" @oninput="UpdateFilteredItems">
+     @if (ShouldRenderWatchList && !Parent.isTab)
+    {
+        <input class="search-div" type="text" placeholder="Search" @oninput="UpdateFilteredItems">
+    }
+    else if (!ShouldRenderWatchList)
+    {
+        <div class="back-text-parent">
+        <SfButton CssClass="e-flat back-text" IconCss="e-icons e-chevron-left" @onclick="@BackToHome">Back to Stock list</SfButton>
+        </div>
+    }
 </div>
 <CascadingValue Value="this">
-    <SfListView Height="86vh" DataSource="@CardDatas">
+    @if (ShouldRenderWatchList)
+    {
+    <SfListView Height="100vh" DataSource="@CardDatas">
         <ListViewFieldSettings TValue="CardData" Text="StockName"></ListViewFieldSettings>
         <ListViewTemplates TValue="CardData">
             <Template>
@@ -27,13 +41,17 @@
             </Template>
         </ListViewTemplates>
         <ListViewEvents TValue="CardData"></ListViewEvents>
-    </SfListView>
+        </SfListView>
+    }
 </CascadingValue>
 
 
 @code {
     [CascadingParameter]
     public BasicLayout Parent { get; set; }
+
+    [Parameter]
+    public bool ShouldRenderWatchList { get; set; }
 
     public string ListViewHeight { get; set; } = "86.4%";
 
@@ -43,7 +61,7 @@
 
     private string selectedStockType = "US Stocks";
 
-    public DialogSettings DialogParams = new DialogSettings { MinHeight = "400px", Width = "450px" };
+    //public DialogSettings DialogParams = new DialogSettings { MinHeight = "400px", Width = "450px" };
 
     public List<ChartData> ChartDatas { get; set; } = new List<ChartData>();
 
@@ -76,16 +94,22 @@
         CardService.StockCardDetails = CardDatas.FirstOrDefault();
         watchListDatas = WatchListService.GetWatchListDatas();
         ChartDatas = ChartService.GenerateSimulatedStockData();
-        MobileHeight = await JSRuntime.InvokeAsync<int>("getScreenHeight");
-        MobileWidth = await JSRuntime.InvokeAsync<int>("getScreenWidth");
-        IsAverageMobileSize = MobileWidth <= 768 && MobileWidth >= 390;
-        IsBelowSize = MobileWidth < 390;
-        IsNestHub = MobileWidth == 1024 && MobileHeight == 600;
-        IsSurfacePro7 = MobileWidth == 912 && MobileHeight == 1368;
-        IsSurfaceDuo = MobileWidth == 540 && MobileHeight == 720;
-        IsBelowMinSize = MobileWidth == 360 || MobileHeight == 280;
-        ListViewHeight = GetListViewClass();
-        StateHasChanged();
+    }
+    protected async Task OnAftreRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            MobileHeight = await JSRuntime.InvokeAsync<int>("getScreenHeight");
+            MobileWidth = await JSRuntime.InvokeAsync<int>("getScreenWidth");
+            IsAverageMobileSize = MobileWidth <= 768 && MobileWidth >= 390;
+            IsBelowSize = MobileWidth < 390;
+            IsNestHub = MobileWidth == 1024 && MobileHeight == 600;
+            IsSurfacePro7 = MobileWidth == 912 && MobileHeight == 1368;
+            IsSurfaceDuo = MobileWidth == 540 && MobileHeight == 720;
+            IsBelowMinSize = MobileWidth == 360 || MobileHeight == 280;
+            ListViewHeight = GetListViewClass();
+            StateHasChanged();
+        }
     }
 
     private string GetListViewClass()
@@ -129,7 +153,19 @@
 
     public void StockSelected(CardData selectedCardData)
     {
-        CardService.StockCardDetails = selectedCardData;
-        Parent.Rerender();
+        if (!selectedCardData.StockName.Equals(CardService.PreviousWatchlistCardData.StockName))
+        {
+            CardService.StockCardDetails = CardService.PreviousCompareCardData = selectedCardData;
+            Parent.Rerender();
+        }
+    }
+    void BackToHome()
+    {
+        CardDatas = CardData.Values.SelectMany(x => x).ToList();
+        if (CardService.IsMobileMode)
+        {
+            CardService.PreviousWatchlistCardData = new CardData();
+        }
+        Parent.ResetSelection();
     }
 }

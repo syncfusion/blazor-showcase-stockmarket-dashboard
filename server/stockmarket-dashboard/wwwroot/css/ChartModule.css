@@ -2,10 +2,6 @@
     height: 100% !important;
 }
 
-#stockchart_stockChart_rangeSelector_rightUnSelectedArea, #stockchart_stockChart_rangeSelector_leftUnSelectedArea {
-    pointer-events: none;
-}
-
 #stockchart_stockChart_rangeSelector_SelectedArea {
     fill: #6528F7;
     opacity: 0.2;
@@ -43,15 +39,30 @@ path[id*=_stockChart_chart_Series_] {
     box-shadow: none !important;
 }
 
+.stock-image {
+    width: 24px; 
+    height: 24px; 
+    border-radius: 40%; 
+    overflow: hidden; 
+}
+
+.stock-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    border-radius: inherit; 
+}
+
 .stock-name {
-    font-weight: 900;
+    font-weight: 600;
+    font-size: 16px;
 }
 
 .span-padding {
     padding: 10px;
 }
 
-.symbol-name {
+.stock-sub-name {
     color: gray;
     padding: 5px 0px 0px 0px;
     font-size: 12px;
@@ -144,7 +155,7 @@ path[id*=_stockChart_chart_Series_] {
 .namelist {
     position: absolute;
     top: 21%;
-    left: 10%;
+    left: 60px;
     font-size: 14px;
     font-family: Inter;
     font-weight: 600;
@@ -156,7 +167,7 @@ path[id*=_stockChart_chart_Series_] {
 .subname {
     position: absolute;
     bottom: 29%;
-    left: 10%;
+    left: 60px;
     font-size: 10px;
     font-family: Inter;
     font-weight: 400;
@@ -187,5 +198,140 @@ path[id*=_stockChart_chart_Series_] {
     justify-content: space-between;
     align-items: center;
     padding: 10px; /* Add padding to create space between elements */
+}
+
+.e-chip-text{
+    font-size: 10px !important;
+}
+
+@media only screen and (max-width: 575px) {
+    /* Styles for Samsung Galaxy S8+ (example) */
+    .symbol-name {
+        font-family: Inter;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 13px;
+        letter-spacing: 0em;
+        text-align: right;
+        margin-right: 10px;
+    }
+
+    .stock-name {
+        font-size: 16px;
+    }
+   
+}
+
+
+@media only screen and (max-width: 683px) {
+    /* Styles for Samsung Galaxy S20 Ultra (example) */
+    .symbol-name {
+        font-family: Inter;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 13px;
+        letter-spacing: 0em;
+        text-align: right;
+        margin-right: 20px;
+    }
+
+    .stock-name {
+        font-size: 16px;
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    /* Styles for iPad Mini, iPad Air, iPad Pro (example) */
+    .symbol-name {
+        font-family: Inter;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 13px;
+        letter-spacing: 0em;
+        text-align: right;
+        margin-right: 20px;
+    }
+
+    .stock-name {
+        font-size: 16px;
+    }
+    
+}
+
+
+@media only screen and (max-width: 1024px) {
+    /* Styles for Surface Pro 7, Surface Duo (example) */
+    .symbol-name {
+        font-family: Inter;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 13px;
+        letter-spacing: 0em;
+        text-align: right;
+        margin-right: 20px;
+    }
+
+    .stock-name {
+        font-size: 16px;
+    }
+   
+}
+
+
+@media only screen and (max-width: 280px) {
+    /* Styles for Galaxy Fold (example) */
+    .symbol-name {
+        font-family: Inter;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 13px;
+        letter-spacing: 0em;
+        text-align: right;
+        margin-right: 20px;
+    }
+
+    .stock-name {
+        font-size: 16px;
+    }
+    
+}
+
+
+@media only screen and (max-width: 412px) {
+    /* Styles for Samsung Galaxy A51/71 (example) */
+    .symbol-name {
+        font-family: Inter;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 13px;
+        letter-spacing: 0em;
+        text-align: right;
+        margin-right: 20px;
+    }
+
+    .stock-name {
+        font-size: 16px;
+    }
+    
+}
+
+
+@media only screen and (max-width: 480px) {
+    /* Styles for Nest Hub and Nest Hub Max (example) */
+    .symbol-name {
+        font-family: Inter;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 13px;
+        letter-spacing: 0em;
+        text-align: right;
+        margin-right: 20px;
+    }
+
+    .stock-name {
+        font-size: 16px;
+    }
+   
 }
 

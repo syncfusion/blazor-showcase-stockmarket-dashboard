@@ -13,6 +13,8 @@ namespace StockMarket.Pages
 
         public List<ChartData> ChartDatas { get; set; } = new List<ChartData>();
 
+        public List<ChartData> StockComparisonData { get; set; } = new List<ChartData>();
+
         public List<CardData> CardDatas = new List<CardData>();
 
         public Dictionary<string, List<CardData>> CardData { get; set; } = new Dictionary<string, List<CardData>>();
@@ -27,7 +29,9 @@ namespace StockMarket.Pages
         {
             CardData = CardService.GetData();
             CardDatas = CardData.Values.SelectMany(x => x).ToList();
-            CardService.StockCard = CardDatas.FirstOrDefault();
+            if (!CardService.IsMobileMode) {
+                CardService.StockCard = CardService.PreviousCompareCardData = CardDatas.FirstOrDefault();
+            }
             watchListDatas = WatchListService.GetWatchListDatas();
             ChartDatas = ChartService.GenerateSimulatedStockData();
             //CardService.OnMessageUpdate += UpdateMessage;
