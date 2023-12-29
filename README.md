@@ -43,6 +43,11 @@ Make sure you have the following installed on your machine:
 
 ![StockMarket Dashboard App](https://github.com/syncfusion/blazor-showcase-stockmarket-dashboard/assets/28931274/35b72fc2-353e-4356-b356-f9fc4852552c)
 
+## Demo
+
+### <a href="https://blazor.syncfusion.com/showcase/stockmarket-dashboard" target="_blank">https://blazor.syncfusion.com/showcase/stockmarket-dashboard</a>
+
+Check all the showcase samples from <a href="https://blazor.syncfusion.com" target="_blank">here</a>.
 
 ## Additional Information
 
