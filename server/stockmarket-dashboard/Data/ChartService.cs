@@ -27,15 +27,15 @@
                 {
                     X = startdate.AddDays(day),
                     Open = currentPrice,
-                    High = intradayHigh,
-                    Low = intradayLow,
-                    Close = intradayClose,
+                    High = Math.Abs(intradayHigh),
+                    Low = Math.Abs(intradayLow),
+                    Close = Math.Abs(intradayClose),
                     Volume = random.Next(10000, 50000)
                 };
 
                 candleData.Add(candle);
                 
-                currentPrice = intradayClose;
+                currentPrice = Math.Abs(intradayClose);
 
                 
             }

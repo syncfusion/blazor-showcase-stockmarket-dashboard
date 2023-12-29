@@ -1,27 +1,32 @@
-﻿<PageTitle>Stock Market Dashboard</PageTitle>
+﻿@inject IJSRuntime JSRuntime
+
+<PageTitle>Stock Market Dashboard</PageTitle>
 <CascadingValue Value="this">
     <div class="stockmarket-container">
-        <div class="column-20">
+        <div class=@GetColumnClass()>
             <div class="watchlist-module">
-                <WatchlistComponent></WatchlistComponent>
+                <WatchlistComponent ShouldRenderWatchList=@GetWatchListVisibility()></WatchlistComponent>
             </div>
         </div>
-        <div class="column-80">
-            <div class="chart-common-module">
-                <ChartComponent @ref="chartComponent"></ChartComponent>
-            </div>
-            <div class="keystats-common-module">
-                <KeyStatisticsComponent @ref="keyStatisticsComponent"></KeyStatisticsComponent>
-            </div>
-            <div class="techinfo">
-                <div class="total-perform total-common-module">
-                    <TotalPerfomanceComponent @ref="totalPerfomanceComponent"></TotalPerfomanceComponent>
+        @if (GetChartVisibility())
+        {
+            <div class="column-80">
+                <div class="chart-common-module">
+                    <ChartComponent @ref="chartComponent"></ChartComponent>
                 </div>
-                <div class="technical tech-common-module">
-                    <TechnicalsComponent @ref="technicalsComponent" PointerValue="@PointerValue"></TechnicalsComponent>
+                <div class="keystats-common-module">
+                    <KeyStatisticsComponent @ref="keyStatisticsComponent"></KeyStatisticsComponent>
+                </div>
+                <div class="techinfo">
+                    <div class="total-perform total-common-module">
+                        <TotalPerfomanceComponent @ref="totalPerfomanceComponent"></TotalPerfomanceComponent>
+                    </div>
+                    <div class="technical tech-common-module">
+                        <TechnicalsComponent @ref="technicalsComponent" PointerValue="@PointerValue"></TechnicalsComponent>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     </div>
 </CascadingValue>
 
@@ -36,11 +41,76 @@
 
     public void Rerender()
     {
-        chartComponent.ChartRefresh();
-        keyStatisticsComponent.KeyStatsRefresh();
-        totalPerfomanceComponent.PerformanceRefresh();
-        technicalsComponent.TechRefresh();
+        if (GetChartVisibility())
+        {
+            chartComponent?.ChartRefresh();
+            keyStatisticsComponent?.KeyStatsRefresh();
+            totalPerfomanceComponent?.PerformanceRefresh();
+            technicalsComponent?.TechRefresh();
+        }
+        else
+        {
+            stockSelected = true;
+            StateHasChanged();
+        }
+    }
+    public void ResetSelection()
+    {
+        stockSelected = false;
+        StateHasChanged();
+    }
+    public bool isMobile = false;
+    public bool isTab = false;
+    bool toggleChart = false;
+    bool stockSelected = false;
+    double screenHeight, screenWidth;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            screenHeight = await JSRuntime.InvokeAsync<int>("getScreenHeight");
+            screenWidth = await JSRuntime.InvokeAsync<int>("getScreenWidth");
+            SetDeviceDetails(screenWidth);
+            if (isMobile || isTab)
+            {
+                try
+                {
+                    await Task.Delay(1000);
+                    await InvokeAsync(StateHasChanged);
+                }
+                catch
+                {
+
+                }
+            }
+        }
+    }
+    private void SetDeviceDetails(double screenWidth)
+    {
+        if (screenWidth <= 1024 && screenWidth >= 720)
+        {
+            isTab = true;
+        }
+        else if (screenWidth < 720)
+        {
+            isMobile = true;
+        }
+        toggleChart = isMobile || isTab;
+    }
+    bool GetWatchListVisibility()
+    {
+        return (isMobile || isTab) ? !stockSelected : true;
+    }
+    bool GetChartVisibility()
+    {
+        return (toggleChart && !stockSelected) ? false : true;
+    }
+    string GetColumnClass()
+    {
+        return GetWatchListVisibility() ? "column-20" : GetColumnClassForDevice();
+    }
+    string GetColumnClassForDevice()
+    {
+        return "column-20 " + (isMobile ? "column-20-hide-mob" : "column-20-hide-tab");
     }
 }
-
-

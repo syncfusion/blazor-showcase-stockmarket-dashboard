@@ -3,16 +3,32 @@
 @inject WatchListService WatchListService
 @inject ChartService ChartService
 @inherits ComponentBase
+@inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
 
 <div id="target">
     <div>
         <SfAppBar ColorMode="AppBarColor.Inherit">
-            <span class="e-avatar e-avatar-circle custom-avatar">
+            <span class="@StockImageClass">
                 <img src=@CardService.StockCardDetails.StockSymbol alt="stock_icon">
             </span>
-            <span class="stock-name span-padding">@CardService.StockCardDetails.StockName</span>
-            <span class="symbol-name">@CardService.StockCardDetails.StockSubName</span>
+
+            @if (CardService.IsMobileMode)
+            {
+                <span class="stock-name" style="font-size: 16px; font-weight: 600; line-height: 20px; padding: 5px; display: block; max-height: 40px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    @CardService.StockCardDetails.StockSubName
+                </span>
+
+                <span class="stock-sub-name" style="font-size: 10px; font-weight: 400; line-height: 17.5px; display: block; max-height: 35px; overflow: hidden; text-overflow: ellipsis; white-space: normal;">
+                    @CardService.StockCardDetails.StockName
+                </span>
+            }
+            else
+            {
+                <span class="stock-name" style="font-size: 16px; font-weight: 600; line-height: 20px; padding: 5px;">@CardService.StockCardDetails.StockSubName</span>
+                <span class="stock-sub-name" style="font-size: 10px; font-weight: 400; line-height: 17.5px">@CardService.StockCardDetails.StockName</span>
+            }
+           
             <AppBarSpacer></AppBarSpacer>
             @{
                 if (CardService.StockCardDetails.UpDownPrice > 0)
@@ -31,17 +47,40 @@
                     </ChipItems>
                 </SfChip>
             </SfChip>
-            <span class="stock-name span-padding">$@CardService.StockCardDetails.StockCurrentPrice</span>
-            <span class="symbol-name">@CardService.StockCardDetails.LastUpdate</span>
+            @if (CardService.IsMobileMode)
+            {
+                <div class="stock-name span-padding">
+                    $@CardService.StockCardDetails.StockCurrentPrice
+                </div>
+            }
+            else
+            {
+                <span class="stock-name span-padding" style="font-size: 18px; font-weight: 600; line-height: 22.5px">$@CardService.StockCardDetails.StockCurrentPrice</span>
+                <span class="symbol-name" style="font-size: 10px; font-weight: 400; line-height: 12.5px">@CardService.StockCardDetails.LastUpdate</span>
+            }
+           
         </SfAppBar>
     </div>
     <div class="@Stockheader">
         <SfAppBar ColorMode="AppBarColor.Inherit">
-            <span class="e-avatar e-avatar-circle custom-avatar">
+            <span class="@StockImageClass">
                 <img src=@CardService.StockCard.StockSymbol alt="stock_icon">
             </span>
-            <span class="stock-name span-padding">@CardService.StockCard.StockName</span>
-            <span class="symbol-name">@CardService.StockCard.StockSubName</span>
+            @if (CardService.IsMobileMode)
+            {
+                <span class="stock-name span-padding" style="font-size: 16px; font-weight: 600; line-height: 20px; padding: 5px; display: block; max-height: 40px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    @CardService.StockCard.StockSubName
+                </span>
+
+                <span class="stock-sub-name" style="font-size: 10px; font-weight: 400; line-height: 17.5px; display: block; max-height: 35px; overflow: hidden; text-overflow: ellipsis; white-space: normal;">
+                    @CardService.StockCard.StockName
+                </span>
+            }
+            else
+            {
+                <span class="stock-name span-padding">@CardService.StockCard.StockSubName</span>
+                <span class="stock-sub-name">@CardService.StockCard.StockName</span>
+            }
             <span class="remove-btn">
                 <SfChip>
                     <ChipItems>
@@ -67,18 +106,41 @@
                     <ChipItem Text="@StockPricePercntage" CssClass=@GetChipColorClass2() TrailingIconCss="@GetTrailingIconClass2()"></ChipItem>
                 </ChipItems>
             </SfChip>
-            <span class="stock-name span-padding">$@CardService.StockCard.StockCurrentPrice</span>
-            <span class="symbol-name">@CardService.StockCard.LastUpdate</span>
+            @if (CardService.IsMobileMode)
+            {
+                <div class="stock-name span-padding">
+                    $@CardService.StockCard.StockCurrentPrice
+                </div>
+            }
+            else{
+                <span class="stock-name span-padding">$@CardService.StockCard.StockCurrentPrice</span>
+                <span class="symbol-name" style="font-size: 10px; font-weight: 400; line-height: 12.5px">@CardService.StockCard.LastUpdate</span>
+            }
+          
         </SfAppBar>
     </div>
     <div>
-        <div>
-            <SfChip>
-                <ChipItems>
-                    <ChipItem @onclick="OpenDialog" Text="+ Compare" CssClass="chip-compare-text"></ChipItem>
-                </ChipItems>
-            </SfChip>
-        </div>
+        @if (CardService.IsMobileMode)
+        {
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <SfChip>
+                    <ChipItems>
+                        <ChipItem @onclick="OpenDialog" Text="@compareChipText" CssClass="chip-compare-text"></ChipItem>
+                    </ChipItems>
+                </SfChip>
+                <div class="symbol-name">@CardService.StockCard.LastUpdate</div>
+            </div>
+        }
+        else
+        {
+            <div>
+                <SfChip>
+                    <ChipItems>
+                        <ChipItem @onclick="OpenDialog" Text="@compareChipText" CssClass="chip-compare-text"></ChipItem>
+                    </ChipItems>
+                </SfChip>
+            </div>
+        }
         <SfDialog Target="#target" Height="480px" Width="640px" ShowCloseIcon="true" @bind-Visible="Visibility" IsModal="true">
             <DialogTemplates>
                 <Header> Compare Stocks </Header>
@@ -101,20 +163,30 @@
             <DialogButtons>
                 <DialogButton Content="Compare" IsPrimary="true" OnClick="@CompareStock" />
             </DialogButtons>
+            <DialogEvents Closed="@ClosedHandler"></DialogEvents>
         </SfDialog>
     </div>
     <div class="@ChartClass">
         @if (IsStockAdded)
         {
             <SfStockChart @ref="sfStockChart" Height="100%" ID="stockchart" Theme=Syncfusion.Blazor.Theme.Tailwind EnableSelector="true" EnablePeriodSelector="true" EnableCustomRange="true" TrendlineType="@TrendlineType" SeriesType="@SeriesType">
+                <StockChartEvents SharedTooltipRendering="StockChartTooltipEvent"></StockChartEvents>
+                <StockChartPeriods>
+                    <StockChartPeriod IntervalType=RangeIntervalType.Months Interval="1" Text='1M' Selected="true"></StockChartPeriod>
+                    <StockChartPeriod IntervalType=RangeIntervalType.Months Interval="3" Text='3M'></StockChartPeriod>
+                    <StockChartPeriod IntervalType=RangeIntervalType.Months Interval="6" Text='6M'></StockChartPeriod>
+                    <StockChartPeriod IntervalType=RangeIntervalType.Months Interval="1" Text='All'></StockChartPeriod>
+                </StockChartPeriods>
                 <StockChartSeriesCollection>
                     <StockChartSeries BullFillColor="#3730A3" Fill="#6528F7" BearFillColor="#E11D48" EnableSolidCandles="true" DataSource="@ChartDatas" Type="ChartSeriesType.Candle" XName="X" High="High" Low="Low" Open="Open" Close="Close" Volume="Volume">
+                        <StockChartSeriesAnimation Enable ="@EnableAnimation"></StockChartSeriesAnimation>
                         <StockChartSeriesBorder Color="#111827" Width="0.5"></StockChartSeriesBorder>
                     </StockChartSeries>
-                    <StockChartSeries DataSource="@ChartDatas" Fill="#FFB400" Type="ChartSeriesType.Spline" XName="X" High="High" Low="Low" Open="Open" Close="Close" Volume="Volume">                      
+                    <StockChartSeries Name="@SeriesName" DataSource="@StockComparisonData" Fill="#FFB400" Type="ChartSeriesType.Spline" XName="X" High="High" Low="Low" Open="Open" Close="Close" Volume="Volume">
+                        <StockChartSeriesAnimation Enable="@EnableAnimation"></StockChartSeriesAnimation>
                     </StockChartSeries>
                 </StockChartSeriesCollection>
-                <StockChartPrimaryYAxis OpposedPosition="false" Interval="10" LabelPosition="AxisPosition.Outside" LabelFormat="C2">
+                <StockChartPrimaryYAxis OpposedPosition="false" LabelPosition="AxisPosition.Outside" LabelFormat="C2">
                     <StockChartAxisLineStyle Width="0" Color="transparent"></StockChartAxisLineStyle>
                     <StockChartAxisMajorTickLines Width="0"></StockChartAxisMajorTickLines>
                     <StockChartAxisMinorTickLines Width="0"></StockChartAxisMinorTickLines>
@@ -135,12 +207,19 @@
         else
         {
             <SfStockChart @ref="sfStockChart" Height="100%" ID="stockchart" Theme=Syncfusion.Blazor.Theme.Tailwind EnableSelector="true" EnablePeriodSelector="true" EnableCustomRange="true" TrendlineType="@TrendlineType" SeriesType="@SeriesType">
+                <StockChartPeriods>
+                    <StockChartPeriod IntervalType=RangeIntervalType.Months Interval="1" Text='1M' Selected="true"></StockChartPeriod>
+                    <StockChartPeriod IntervalType=RangeIntervalType.Months Interval="3" Text='3M'></StockChartPeriod>
+                    <StockChartPeriod IntervalType=RangeIntervalType.Months Interval="6" Text='6M'></StockChartPeriod>
+                    <StockChartPeriod IntervalType=RangeIntervalType.Months Interval="1" Text='All'></StockChartPeriod>
+                </StockChartPeriods>
                 <StockChartSeriesCollection>
                     <StockChartSeries BullFillColor="#3730A3" Fill="#6528F7" BearFillColor="#E11D48" EnableSolidCandles="true" DataSource="@ChartDatas" Type="ChartSeriesType.Candle" XName="X" High="High" Low="Low" Open="Open" Close="Close" Volume="Volume">
+                        <StockChartSeriesAnimation Enable="@EnableAnimation"></StockChartSeriesAnimation>
                         <StockChartSeriesBorder Color="#111827" Width="0.5"></StockChartSeriesBorder>
                     </StockChartSeries>
                 </StockChartSeriesCollection>
-                <StockChartPrimaryYAxis OpposedPosition="false" Interval="10" LabelPosition="AxisPosition.Outside" LabelFormat="C2">
+                <StockChartPrimaryYAxis OpposedPosition="false" LabelPosition="AxisPosition.Outside" LabelFormat="C2">
                     <StockChartAxisLineStyle Width="0" Color="transparent"></StockChartAxisLineStyle>
                     <StockChartAxisMajorTickLines Width="0"></StockChartAxisMajorTickLines>
                     <StockChartAxisMinorTickLines Width="0"></StockChartAxisMinorTickLines>
@@ -154,7 +233,7 @@
                 </StockChartChartArea>
                 <StockChartChartBorder Width="0"></StockChartChartBorder>
                 <StockChartZoomSettings ToolbarItems=@toolbarItems EnableMouseWheelZooming="true" EnablePan="false"></StockChartZoomSettings>
-                <StockChartTooltipSettings Header="" Enable="true" Shared="true" TooltipPosition="TooltipPosition.Nearest"></StockChartTooltipSettings>
+                <StockChartTooltipSettings Header="" Enable="true" TooltipPosition="TooltipPosition.Nearest"></StockChartTooltipSettings>
                 <StockChartCrosshairSettings Enable="true" LineType="LineType.Vertical"></StockChartCrosshairSettings>
             </SfStockChart>
         }
@@ -164,12 +243,30 @@
 <style>
     div[id*="_selector_Secondary_Element"] {
         transform: translate(0px, -4px) !important;
+        -moz-transform: translate(0px, -3px) !important;
+    }
+    .e-chip {
+        height: 14px !important;
+    }
+    .e-chip .e-chip-text {
+            font-size: 10px;
+            font-weight: 600;
+            line-height: 12px;
+    }
+    .search {
+        border: 1px solid #000;
+        text-indent: 2% !important;
     }
 </style>
 
 @code{
     List<Syncfusion.Blazor.Charts.ToolbarItems> toolbarItems = new List<Syncfusion.Blazor.Charts.ToolbarItems>() { };
+
     private string chipText = "0.00%";
+
+    public string SeriesName { get; set; } = string.Empty;
+
+    public bool EnableAnimation { get; set; } = true;
 
     private string UpDownStockPricePercntage { get; set; } = string.Empty;
 
@@ -188,6 +285,18 @@
     private string searchTerm = "";
 
     private bool Visibility { get; set; } = false;
+
+    private string compareChipText = "+ Compare";
+
+    private bool isStockSelected = false;
+
+    private CardData tempCardData{ get; set; }
+
+    public double MobileHeight { get; set; } = 0;
+
+    public double MobileWidth { get; set; } = 0;
+
+    public string StockImageClass { get; set; } = "e-avatar e-avatar-circle custom-avatar";
 
     private void OpenDialog()
     {
@@ -241,24 +350,77 @@
 
     public void Selected(CardData selectedCardData)
     {
-        CardService.StockCard = selectedCardData;
-        Stockheader = "add-stock";
-        ChartClass = "chart-after-compare";
-        IsStockAdded = true;
+        if (!selectedCardData.StockName.Equals(CardService.PreviousCompareCardData.StockName))
+        {
+            tempCardData = selectedCardData;
+            SeriesName = selectedCardData.StockName;
+            isStockSelected = true;
+            CardService.PreviousWatchlistCardData = selectedCardData;
+        }
     }
 
     public void CompareStock()
     {
-        sfStockChart?.Refresh();
-        StateHasChanged();
+        if(isStockSelected)
+        {
+            UpdateStockCardData();
+            Stockheader = "add-stock";
+            ChartClass = "chart-after-compare";
+            StockComparisonData = ChartService.GenerateSimulatedStockData();
+            IsStockAdded = true;
+            EnableAnimation = false;
+            sfStockChart?.Refresh();
+            Visibility = false;
+            compareChipText = "+ Change";
+            isStockSelected = false;
+            StateHasChanged();
+        }
     }
 
+    public void StockChartTooltipEvent(SharedTooltipRenderEventArgs args)
+    {
+        if (args.Text.Count > 1 && !string.IsNullOrEmpty(args.Text[1]))
+        {
+            string[] tempArray = args.Text[1].Split(':');
+            if (tempArray.Length == 2)
+            {
+                args.Text[1] = args.Data[1].SeriesName + " : " + args.Text[1].Split(':')[1];
+            }
+        }
+    }
+
+    private void UpdateStockCardData()
+    {
+        CardService.StockCard = tempCardData;
+    }
+
+    public void ClosedHandler(CloseEventArgs args)
+    {
+        isStockSelected = false;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            MobileHeight = await JSRuntime.InvokeAsync<int>("getScreenHeight");
+            MobileWidth = await JSRuntime.InvokeAsync<int>("getScreenWidth");
+            CardService.IsMobileMode = MobileWidth < 768;
+            if (CardService.IsMobileMode)
+            {
+                StockImageClass = "stock-image"; 
+            }
+            StateHasChanged();
+        }
+    }
 
     private void RemoveStock()
     {
+        CardService.PreviousWatchlistCardData = new CardData();
         Stockheader = "remove-stock";
         ChartClass = "chart-common";
         IsStockAdded = false;
+        compareChipText = "+ Compare";
         sfStockChart?.Refresh();
         StateHasChanged();
     }

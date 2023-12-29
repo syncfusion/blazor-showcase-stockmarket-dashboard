@@ -15,6 +15,10 @@ builder.Services.AddSingleton<ChartService>();
 builder.Services.AddSingleton<PerformanceService>();
 builder.Services.AddSingleton<KeyStatisticsService>();
 builder.Services.AddSingleton<TechnicalService>();
+builder.Services.AddServerSideBlazor().AddHubOptions(o =>
+{
+    o.MaximumReceiveMessageSize = 102400000;
+});
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Your License Key");
 var app = builder.Build();
 
