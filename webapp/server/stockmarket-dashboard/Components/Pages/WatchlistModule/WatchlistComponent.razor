@@ -1,0 +1,171 @@
+﻿@namespace StockMarket.Components.Pages
+@inject CardService CardService
+@inject WatchListService WatchListService
+@inject ChartService ChartService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+@inherits ComponentBase
+
+<div class="list-container">
+    <div class="heading">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75736 1.75736C0 3.51472 0 6.34315 0 12V16C0 21.6569 0 24.4853 1.75736 26.2426C2.52357 27.0089 3.49339 27.441 4.81247 27.6847V15.75L9.18747 14V27.9895C10.0387 28 10.9727 28 12 28H16C17.0273 28 17.9612 28 18.8125 27.9895V8.75L23.1875 7V27.6847C24.5066 27.441 25.4764 27.0089 26.2426 26.2426C28 24.4853 28 21.6569 28 16V12C28 6.34315 28 3.51472 26.2426 1.75736C24.4853 0 21.6569 0 16 0H12C6.34315 0 3.51472 0 1.75736 1.75736ZM16.1875 10.4997L11.8125 12.2497V27.9997H16.1875V10.4997Z" fill="#6528F7" />
+        </svg>
+        <div class="title">
+            <span class="title1">Pure</span><span class="title2">Stocks</span>
+        </div>
+        @if (ShouldRenderWatchList && Parent.isTab)
+        {
+            <input class="search-div search-div-tab" type="text" placeholder="Search" @oninput="UpdateFilteredItems">
+        }
+    </div>
+     @if (ShouldRenderWatchList && !Parent.isTab)
+    {
+        <input class="search-div" type="text" placeholder="Search" @oninput="UpdateFilteredItems">
+    }
+    else if (!ShouldRenderWatchList)
+    {
+        <div class="back-text-parent">
+        <SfButton CssClass="e-flat back-text" IconCss="e-icons e-chevron-left" @onclick="@BackToHome">Back to Stock list</SfButton>
+        </div>
+    }
+</div>
+<CascadingValue Value="this">
+    @if (ShouldRenderWatchList)
+    {
+    <SfListView Height="100vh" DataSource="@CardDatas">
+        <ListViewFieldSettings TValue="CardData" Text="StockName"></ListViewFieldSettings>
+        <ListViewTemplates TValue="CardData">
+            <Template>
+                <StockComponent Context="@context"></StockComponent>
+            </Template>
+        </ListViewTemplates>
+        <ListViewEvents TValue="CardData"></ListViewEvents>
+        </SfListView>
+    }
+</CascadingValue>
+
+
+@code {
+    [CascadingParameter]
+    public BasicLayout Parent { get; set; }
+
+    [Parameter]
+    public bool ShouldRenderWatchList { get; set; }
+
+    public string ListViewHeight { get; set; } = "86.4%";
+
+    List<string> Events = new List<string>();
+
+    private string searchTerm = "";
+
+    private string selectedStockType = "US Stocks";
+
+    //public DialogSettings DialogParams = new DialogSettings { MinHeight = "400px", Width = "450px" };
+
+    public List<ChartData> ChartDatas { get; set; } = new List<ChartData>();
+
+    public List<CardData> CardDatas = new List<CardData>();
+
+    public Dictionary<string, List<CardData>> CardData { get; set; } = new Dictionary<string, List<CardData>>();
+
+    public List<WatchListData> watchListDatas = new List<WatchListData>();
+
+    private bool IsAverageMobileSize { get; set; } = false;
+
+    private bool IsBelowSize { get; set; } = false;
+
+    private bool IsBelowMinSize { get; set; } = false;
+
+    private bool IsNestHub { get; set; } = false;
+
+    private bool IsSurfacePro7 { get; set; } = false;
+
+    private bool IsSurfaceDuo { get; set; } = false;
+
+    private double MobileWidth { get; set; }
+
+    private double MobileHeight { get; set; }
+
+    protected override async void OnInitialized()
+    {
+        CardData = CardService.GetData();
+        CardDatas = CardData.Values.SelectMany(x => x).ToList();
+        CardService.StockCardDetails = CardDatas.FirstOrDefault();
+        watchListDatas = WatchListService.GetWatchListDatas();
+        ChartDatas = ChartService.GenerateSimulatedStockData();
+    }
+    protected async Task OnAftreRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            MobileHeight = await JSRuntime.InvokeAsync<int>("getScreenHeight");
+            MobileWidth = await JSRuntime.InvokeAsync<int>("getScreenWidth");
+            IsAverageMobileSize = MobileWidth <= 768 && MobileWidth >= 390;
+            IsBelowSize = MobileWidth < 390;
+            IsNestHub = MobileWidth == 1024 && MobileHeight == 600;
+            IsSurfacePro7 = MobileWidth == 912 && MobileHeight == 1368;
+            IsSurfaceDuo = MobileWidth == 540 && MobileHeight == 720;
+            IsBelowMinSize = MobileWidth == 360 || MobileHeight == 280;
+            ListViewHeight = GetListViewClass();
+            StateHasChanged();
+        }
+    }
+
+    private string GetListViewClass()
+    {
+        if (IsSurfaceDuo)
+        {
+
+            return "69%";
+        }
+        else if (IsAverageMobileSize)
+        {
+            return "72.4%";
+        }
+        else if (IsNestHub)
+        {
+            return "43%";
+        }
+        else if (IsSurfacePro7)
+        {
+            return "77.4%";
+        }
+        else if (IsBelowMinSize)
+        {
+            return "70%";
+        }
+        else if (IsBelowSize)
+        {
+            return "65%";
+        }        
+        else
+        {
+            return "83.4%";
+        }
+    }
+
+    public void UpdateFilteredItems(Microsoft.AspNetCore.Components.ChangeEventArgs e)
+    {
+        searchTerm = e.Value.ToString();
+        CardDatas = string.IsNullOrEmpty(searchTerm) ? CardData.Values.SelectMany(x => x).ToList() : CardDatas.Where(card => card.StockName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+
+    public void StockSelected(CardData selectedCardData)
+    {
+        if (!selectedCardData.StockName.Equals(CardService.PreviousWatchlistCardData.StockName))
+        {
+            CardService.StockCardDetails = CardService.PreviousCompareCardData = selectedCardData;
+            Parent.Rerender();
+        }
+    }
+    void BackToHome()
+    {
+        CardDatas = CardData.Values.SelectMany(x => x).ToList();
+        if (CardService.IsMobileMode)
+        {
+            CardService.PreviousWatchlistCardData = new CardData();
+        }
+        Parent.ResetSelection();
+    }
+}

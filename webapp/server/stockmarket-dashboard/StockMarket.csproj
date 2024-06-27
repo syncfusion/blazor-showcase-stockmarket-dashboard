@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<None Remove="Pages\ChartModule\ChartComponent.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Syncfusion.Blazor" Version="26.1.35" />
+  </ItemGroup>
+
+</Project>

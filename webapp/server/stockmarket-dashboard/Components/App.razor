@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link href="css/site.css" rel="stylesheet" />
+    <link href="StockMarket.styles.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link href="_content/Syncfusion.Blazor/styles/tailwind.css" rel="stylesheet" />
+    <link href="styles/BasicLayout.css" rel="stylesheet" />
+    <link href="css/ChartModule.css" rel="stylesheet" />
+    <link href="css/KeyStatsModule.css" rel="stylesheet" />
+    <link href="css/PerfomanceModule.css" rel="stylesheet" />
+    <link href="css/TechnicalModule.css" rel="stylesheet" />
+    <link href="css/WatchListModule.css" rel="stylesheet" />
+    <script src="./scripts/mobile-mode.js"></script>
+    <script src="./scripts/syncfusion-blazor.min.js" type="text/javascript"></script>
+    <HeadOutlet @rendermode="@InteractiveServer" />
+</head>
+
+<body>
+    <Routes @rendermode="@InteractiveServer" />
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+</body>
+
+</html>

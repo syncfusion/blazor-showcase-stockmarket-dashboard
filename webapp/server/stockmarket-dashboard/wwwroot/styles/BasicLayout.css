@@ -1,0 +1,571 @@
+﻿.stockmarket-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: #FAFAFA;
+    overflow-y: hidden;
+    user-select: none;
+}
+
+.column-80 {
+    width: 75%;
+    position: relative;
+    height: 100vh;
+    overflow-y: auto; 
+}
+
+.column-80::-webkit-scrollbar {
+    width: 12px;
+}
+
+.column-80::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 6px;
+}
+
+.column-80::-webkit-scrollbar-track {
+    background-color: #f1f1f1; 
+}
+
+.column-20 {
+    width: 24.3%;
+}
+.column-20-hide-mob{
+    height: 105px !important;
+}
+.column-20-hide-tab {
+    height: 105px !important;
+}
+
+
+.chart-common-module {
+    padding: 1%;
+    border-radius: 20px;
+    margin: 2% 2% 2% 2%;
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    height: 586px;
+}
+
+.keystats-common-module {
+    padding: 1%;
+    border-radius: 20px;
+    margin: 2% 2% 2% 2%;
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    height: 224px;
+}
+
+.total-common-module {
+    padding: 1%;
+    border-radius: 20px;
+    margin: 0.5% 1% 2% 2%;
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5E5;
+}
+
+.tech-common-module {
+    padding: 1%;
+    border-radius: 20px;
+    margin: 0.5% 2% 2% 2%;
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5E5;
+}
+
+.watchlist-module {
+    border: 1px solid #E5E5E5;
+    height: 100vh;
+}
+
+.techinfo {
+    display: inline-flex;
+    width: 100%;
+    height: 320px;
+}
+
+.total-perform {
+    width: 50%;
+    height: 100%;
+}
+
+.technical {
+    width: 50%;
+    height: 100%;
+}
+
+
+@media only screen and (max-width: 414px) {
+    /* Styles for iPhone XR and iPhone 12 Pro */
+
+    .stockmarket-container {
+        flex-direction: row;
+    }
+
+    .column-80 {
+        width: 100%;
+    }
+
+    .column-20 {
+        width: 100%;
+        position: initial;
+        height: 100vh;
+    }
+
+    .stockchart {
+        height: auto; /* Adjust as needed for mobile view */
+    }
+
+    .common-module {
+        margin: 0.6% 0 0 0;
+    }
+
+    .watchlist-module {
+        height: 50vh;
+    }
+
+    .techinfo {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .total-perform {
+        width: 100%;
+        margin: 0.6% 0 0 0;
+    }
+
+    .technical {
+        width: 100%;
+        height: 50vh;
+        margin: 0.6% 0 0 0;
+    }
+}
+
+@media only screen and (max-width: 428px) {
+    /* Styles for iPhone 14 Pro Max (example) */
+
+    .stockmarket-container {
+        flex-direction: row;
+    }
+
+    .column-80 {
+        width: 100%;
+    }
+
+    .column-20 {
+        width: 100%;
+        position: initial;
+        height: 100vh;
+    }
+
+    .stockchart {
+        height: auto; /* Adjust as needed for mobile view */
+    }
+
+    .common-module {
+        margin: 0.6% 0 0 0;
+    }
+
+    .watchlist-module {
+        height: 50vh;
+    }
+
+    .techinfo {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .total-perform {
+        width: 100%;
+        margin: 0.6% 0 0 0;
+    }
+
+    .technical {
+        width: 100%;
+        height: 50vh;
+        margin: 0.6% 0 0 0;
+    }
+}
+
+@media only screen and (max-width: 393px) {
+    /* Styles for Pixel 7 (example) */
+
+    .stockmarket-container {
+        flex-direction: row;
+    }
+
+    .column-80 {
+        width: 100%;
+    }
+
+    .column-20 {
+        width: 100%;
+        position: initial;
+        height: 100vh;
+    }
+
+    .stockchart {
+        height: auto; /* Adjust as needed for mobile view */
+    }
+
+    .common-module {
+        margin: 0.6% 0 0 0;
+    }
+
+    .watchlist-module {
+        height: 50vh;
+    }
+
+    .techinfo {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .total-perform {
+        width: 100%;
+        margin: 0.6% 0 0 0;
+    }
+
+    .technical {
+        width: 100%;
+        height: 50vh;
+        margin: 0.6% 0 0 0;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    /* Styles for Samsung Galaxy S8+ (example) */
+
+    .stockmarket-container {
+        flex-direction: row;
+    }
+
+    .column-80 {
+        width: 100%;
+    }
+
+    .column-20 {
+        width: 100%;
+        position: initial;
+        height: 100vh;
+    }
+
+    .stockchart {
+        height: auto; /* Adjust as needed for mobile view */
+    }
+
+    .common-module {
+        margin: 0.6% 0 0 0;
+    }
+
+    .watchlist-module {
+        height: 50vh;
+    }
+
+    .techinfo {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .total-perform {
+        width: 100%;
+        margin: 0.6% 0 0 0;
+    }
+
+    .technical {
+        width: 100%;
+        height: 50vh;
+        margin: 0.6% 0 0 0;
+    }
+}
+
+
+@media only screen and (max-width: 683px) {
+    /* Styles for Samsung Galaxy S20 Ultra (example) */
+
+    .stockmarket-container {
+        flex-direction: row;
+    }
+
+    .column-80 {
+        width: 100%;
+    }
+
+    .column-20 {
+        width: 100%;
+        position: initial;
+        height: 100vh;
+    }
+
+    .stockchart {
+        height: auto; /* Adjust as needed for mobile view */
+    }
+
+    .common-module {
+        margin: 0.6% 0 0 0;
+    }
+
+    .watchlist-module {
+        height: 50vh;
+    }
+
+    .techinfo {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .total-perform {
+        width: 100%;
+        margin: 0.6% 0 0 0;
+    }
+
+    .technical {
+        width: 100%;
+        height: 50vh;
+        margin: 0.6% 0 0 0;
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    /* Styles for iPad Mini, iPad Air, iPad Pro (example) */
+
+    .stockmarket-container {
+        flex-direction: row;
+    }
+
+    .column-80 {
+        width: 100%;
+    }
+
+    .column-20 {
+        width: 100%;
+        position: initial;
+        height: 100vh;
+    }
+
+    .stockchart {
+        height: auto; /* Adjust as needed for mobile view */
+    }
+
+    .common-module {
+        margin: 0.6% 0 0 0;
+    }
+
+    .watchlist-module {
+        height: 50vh;
+    }
+
+    .techinfo {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .total-perform {
+        width: 100%;
+        margin: 0.6% 0 0 0;
+    }
+
+    .technical {
+        width: 100%;
+        height: 50vh;
+        margin: 0.6% 0 0 0;
+    }
+}
+
+
+@media only screen and (max-width: 1024px) {
+    /* Styles for Surface Pro 7, Surface Duo (example) */
+
+    .stockmarket-container {
+        flex-direction: row;
+    }
+
+    .column-80 {
+        width: 100%;
+    }
+
+    .column-20 {
+        width: 100%;
+        position: initial;
+        height: 100vh;
+    }
+
+    .stockchart {
+        height: auto; /* Adjust as needed for mobile view */
+    }
+
+    .common-module {
+        margin: 0.6% 0 0 0;
+    }
+
+    .watchlist-module {
+        height: 63vh;
+    }
+
+    .techinfo {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .total-perform {
+        width: 100%;
+        margin: 0.6% 0 0 0;
+    }
+
+    .technical {
+        width: 100%;
+        height: 50vh;
+        margin: 0.6% 0 0 0;
+    }
+}
+
+@media only screen and (max-width: 280px) {
+    /* Styles for Galaxy Fold (example) */
+
+    .stockmarket-container {
+        flex-direction: row;
+    }
+
+    .column-80 {
+        width: 100%;
+    }
+
+    .column-20 {
+        width: 100%;
+        position: initial;
+        height: 100vh;
+    }
+
+    .stockchart {
+        height: auto; /* Adjust as needed for mobile view */
+    }
+
+    .common-module {
+        margin: 0.6% 0 0 0;
+    }
+
+    .watchlist-module {
+        height: 50vh;
+    }
+
+    .techinfo {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .total-perform {
+        width: 100%;
+        margin: 0.6% 0 0 0;
+    }
+
+    .technical {
+        width: 100%;
+        height: 50vh;
+        margin: 0.6% 0 0 0;
+    }
+}
+
+
+@media only screen and (max-width: 412px) {
+    /* Styles for Samsung Galaxy A51/71 (example) */
+
+    .stockmarket-container {
+        flex-direction: row;
+    }
+
+    .column-80 {
+        width: 100%;
+    }
+
+    .column-20 {
+        width: 100%;
+        position: initial;
+        height: 100vh;
+    }
+
+    .stockchart {
+        height: auto; /* Adjust as needed for mobile view */
+    }
+
+    .common-module {
+        margin: 0.6% 0 0 0;
+    }
+
+    .watchlist-module {
+        height: 50vh;
+    }
+
+    .techinfo {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .total-perform {
+        width: 100%;
+        margin: 0.6% 0 0 0;
+    }
+
+    .technical {
+        width: 100%;
+        height: 50vh;
+        margin: 0.6% 0 0 0;
+    }
+}
+
+
+@media only screen and (max-width: 480px) {
+    /* Styles for Nest Hub and Nest Hub Max (example) */
+
+    .stockmarket-container {
+        flex-direction: row;
+    }
+
+    .column-80 {
+        width: 100%;
+    }
+
+    .column-20 {
+        width: 100%;
+        position: initial;
+        height: 100vh;
+    }
+
+    .stockchart {
+        height: auto; /* Adjust as needed for mobile view */
+    }
+
+    .common-module {
+        margin: 0.6% 0 0 0;
+    }
+
+    .watchlist-module {
+        height: 50vh;
+    }
+
+    .techinfo {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .total-perform {
+        width: 100%;
+        margin: 0.6% 0 0 0;
+    }
+
+    .technical {
+        width: 100%;
+        height: 50vh;
+        margin: 0.6% 0 0 0;
+    }
+}
+
+.back-text {
+    font-family: Inter !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    line-height: 20px !important;
+    letter-spacing: 0em !important;
+    text-align: left !important;
+    color: #6528F7 !important;
+}
