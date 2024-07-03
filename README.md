@@ -37,7 +37,7 @@ The sample requires the below requirements to run.
     dotnet run
     ```
 
-2. Open your web browser and navigate to `https://localhost:5001` to view the app.
+2. Open your web browser and navigate to `http://localhost:5162` to view the app.
 
 ## Output
 
