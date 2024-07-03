@@ -2,20 +2,42 @@
 
 This stock market dashboard demo application exemplifies the seamless integration of various Syncfusion Blazor UI components within a real-world application scenario. The demonstration focuses on presenting dynamic stock prices for different companies, offering a comprehensive showcase of the capabilities and functionalities of these components.
 
-## Deployment
+## Prerequisites
 
-### Requirements to run the demo
-
-The samples requires the below requirements to run.
+The sample requires the below requirements to run.
 
 * [Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
 * [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
-### Run
+## Getting Started
 
-1. Clone this repository.
-2. Open the `.csproj` file in VS 2022.
-3. Click the green run button in the toolbar.
+1. Clone this repository to your local machine:
+
+    ```bash
+    git clone https://github.com/syncfusion/blazor-showcase-stockmarket-dashboard.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```bash
+    cd server/stockmarket-dashboard
+    ```
+
+3. Build the application:
+
+    ```bash
+    dotnet build
+    ```
+
+## Running the App
+
+1. Run the application:
+
+    ```bash
+    dotnet run
+    ```
+
+2. Open your web browser and navigate to `https://localhost:5001` to view the app.
 
 ## Output
 
