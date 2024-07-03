@@ -9,35 +9,11 @@ Make sure you have the following installed on your machine:
 - [.NET SDK](https://dotnet.microsoft.com/download)
 - [Visual Studio](https://visualstudio.microsoft.com/) or [Visual Studio Code](https://code.visualstudio.com/) (optional, but recommended)
 
-## Getting Started
+### Run
 
-1. Clone this repository to your local machine:
-
-    ```bash
-    git clone https://github.com/syncfusion/blazor-showcase-stockmarket-dashboard.git
-    ```
-
-2. Navigate to the project directory:
-
-    ```bash
-    cd server/stockmarket-dashboard
-    ```
-
-3. Build the application:
-
-    ```bash
-    dotnet build
-    ```
-
-## Running the App
-
-1. Run the application:
-
-    ```bash
-    dotnet run
-    ```
-
-2. Open your web browser and navigate to `https://localhost:5001` to view the app.
+1. Clone this repository.
+2. Open the `.csproj` file in VS 2022.
+3. Click the green run button in the toolbar.
 
 ## Output
 
