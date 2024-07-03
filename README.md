@@ -2,12 +2,14 @@
 
 This stock market dashboard demo application exemplifies the seamless integration of various Syncfusion Blazor UI components within a real-world application scenario. The demonstration focuses on presenting dynamic stock prices for different companies, offering a comprehensive showcase of the capabilities and functionalities of these components.
 
-## Prerequisites
+## Deployment
 
-Make sure you have the following installed on your machine:
+### Requirements to run the demo
 
-- [.NET SDK](https://dotnet.microsoft.com/download)
-- [Visual Studio](https://visualstudio.microsoft.com/) or [Visual Studio Code](https://code.visualstudio.com/) (optional, but recommended)
+The samples requires the below requirements to run.
+
+* [Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
+* [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
 ### Run
 
