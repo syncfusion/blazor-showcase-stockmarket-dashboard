@@ -3,7 +3,7 @@ using Syncfusion.Blazor.Charts;
 using Syncfusion.Blazor.Grids;
 using Microsoft.AspNetCore.Components;
 
-namespace StockMarket.Pages
+namespace StockMarket.Components.Pages
 {
     public partial class ChartComponent: ComponentBase
     {

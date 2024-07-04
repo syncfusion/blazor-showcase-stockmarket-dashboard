@@ -1,18 +1,14 @@
-﻿@page "/"
-@using Microsoft.AspNetCore.Components.Web
-@namespace StockMarket.Pages
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="~/" />
+    <base href="/" />
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link href="css/site.css" rel="stylesheet" />
     <link href="StockMarket.styles.css" rel="stylesheet" />
-    <link rel="shortcut icon" href="~/favicon.ico" />
+    <link rel="shortcut icon" href="favicon.ico" />
     <link href="_content/Syncfusion.Blazor/styles/tailwind.css" rel="stylesheet" />
     <link href="styles/BasicLayout.css" rel="stylesheet" />
     <link href="css/ChartModule.css" rel="stylesheet" />
@@ -20,13 +16,13 @@
     <link href="css/PerfomanceModule.css" rel="stylesheet" />
     <link href="css/TechnicalModule.css" rel="stylesheet" />
     <link href="css/WatchListModule.css" rel="stylesheet" />
-    <script src="~/scripts/mobile-mode.js"></script>
-    <script src="~/scripts/syncfusion-blazor.min.js" type="text/javascript"></script>
-    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+    <script src="./scripts/mobile-mode.js"></script>
+    <script src="./scripts/syncfusion-blazor.min.js" type="text/javascript"></script>
+    <HeadOutlet @rendermode="@InteractiveServer" />
 </head>
-<body>
-    <component type="typeof(App)" render-mode="ServerPrerendered" />
 
+<body>
+    <Routes @rendermode="@InteractiveServer" />
     <div id="blazor-error-ui">
         <environment include="Staging,Production">
             An error has occurred. This application may no longer respond until reloaded.
@@ -40,4 +36,5 @@
 
     <script src="_framework/blazor.server.js"></script>
 </body>
+
 </html>

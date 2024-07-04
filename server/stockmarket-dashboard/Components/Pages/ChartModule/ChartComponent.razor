@@ -1,10 +1,11 @@
-﻿@namespace StockMarket.Pages
+﻿@namespace StockMarket.Components.Pages
 @inject CardService CardService
 @inject WatchListService WatchListService
 @inject ChartService ChartService
 @inherits ComponentBase
 @inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
+
 
 <div id="target">
     <div>
@@ -41,11 +42,9 @@
                 }
             }
             <SfChip>
-                <SfChip>
-                    <ChipItems>
-                        <ChipItem Text="@UpDownStockPricePercntage" CssClass=@GetChipColorClass() TrailingIconCss="@GetTrailingIconClass()"></ChipItem>
-                    </ChipItems>
-                </SfChip>
+                <ChipItems>
+                    <ChipItem Text="@UpDownStockPricePercntage" CssClass=@GetChipColorClass() TrailingIconCss="@GetTrailingIconClass()"></ChipItem>
+                </ChipItems>
             </SfChip>
             @if (CardService.IsMobileMode)
             {

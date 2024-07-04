@@ -4,10 +4,10 @@ This stock market dashboard demo application exemplifies the seamless integratio
 
 ## Prerequisites
 
-Make sure you have the following installed on your machine:
+The sample requires the below requirements to run.
 
-- [.NET SDK](https://dotnet.microsoft.com/download)
-- [Visual Studio](https://visualstudio.microsoft.com/) or [Visual Studio Code](https://code.visualstudio.com/) (optional, but recommended)
+* [Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
+* [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
 ## Getting Started
 
@@ -37,7 +37,7 @@ Make sure you have the following installed on your machine:
     dotnet run
     ```
 
-2. Open your web browser and navigate to `https://localhost:5001` to view the app.
+2. Open your web browser and navigate to `http://localhost:5162` to view the app.
 
 ## Output
 
