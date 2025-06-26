@@ -1,3 +1,5 @@
+[![.NET](https://github.com/ArunKumar-SF3979/blazor-showcase-stockmarket-dashboard/actions/workflows/dotnet.yml/badge.svg)](https://github.com/ArunKumar-SF3979/blazor-showcase-stockmarket-dashboard/actions/workflows/dotnet.yml)
+
 # Stockmarket Dashboard App
 
 This stock market dashboard demo application exemplifies the seamless integration of various Syncfusion Blazor UI components within a real-world application scenario. The demonstration focuses on presenting dynamic stock prices for different companies, offering a comprehensive showcase of the capabilities and functionalities of these components.
