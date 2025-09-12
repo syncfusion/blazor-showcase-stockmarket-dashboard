@@ -11,9 +11,9 @@
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75736 1.75736C0 3.51472 0 6.34315 0 12V16C0 21.6569 0 24.4853 1.75736 26.2426C2.52357 27.0089 3.49339 27.441 4.81247 27.6847V15.75L9.18747 14V27.9895C10.0387 28 10.9727 28 12 28H16C17.0273 28 17.9612 28 18.8125 27.9895V8.75L23.1875 7V27.6847C24.5066 27.441 25.4764 27.0089 26.2426 26.2426C28 24.4853 28 21.6569 28 16V12C28 6.34315 28 3.51472 26.2426 1.75736C24.4853 0 21.6569 0 16 0H12C6.34315 0 3.51472 0 1.75736 1.75736ZM16.1875 10.4997L11.8125 12.2497V27.9997H16.1875V10.4997Z" fill="#6528F7" />
         </svg>
-        <div class="title">
+        <h1 class="title">
             <span class="title1">Pure</span><span class="title2">Stocks</span>
-        </div>
+        </h1>
         @if (ShouldRenderWatchList && Parent.isTab)
         {
             <input class="search-div search-div-tab" type="text" placeholder="Search" @oninput="UpdateFilteredItems">
