@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-	<PackageReference Include="Syncfusion.Blazor" Version="31.1.17" />
+	  <PackageReference Include="Syncfusion.Blazor" Version="32.1.19" />
   </ItemGroup>
 
 </Project>

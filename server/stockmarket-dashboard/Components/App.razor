@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject NavigationManager Urihelper
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,6 +8,37 @@
     <meta name="description" content="StockMarket Dashboard Showcase app offers real-time data, analytics, insights, presenting key financial metrics, market trends in a user-friendly interface." />
     <title>Stockmarket Dashboard - Syncfusion Blazor Showcase Demo</title>
     <base href="/" />
+    <link href=@Urihelper.Uri rel="canonical" />
+    <!-- Google Tag Manager -->
+    <!-- Load GTM-P3WXFWCW immediately on page load  -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-P3WXFWCW');
+    </script>
+    <!-- Load GTM-W8WD8WN on user interaction -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const events = ["mousemove", "scroll", "keydown", "touchstart"];
+            function loadGTM() {
+                events.forEach(event => document.removeEventListener(event, loadGTM));
+                (function (w, d, s, l, i) {
+                    w[l] = w[l] || []; w[l].push({
+                        'gtm.start':
+                            new Date().getTime(), event: 'gtm.js'
+                    }); var f = d.getElementsByTagName(s)[0],
+                        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                            'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+                })(window, document, 'script', 'dataLayer', 'GTM-W8WD8WN');
+            }
+            events.forEach(event => document.addEventListener(event, loadGTM, { once: true }));
+        });
+    </script>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link href="StockMarket.styles.css" rel="stylesheet" />
     <link rel="shortcut icon" href="favicon.ico" />
@@ -25,6 +57,16 @@
 
 <body>
     <Routes @rendermode="@InteractiveServer" />
+    <!-- Google Tag Manager (noscript) -->
+    <!--Page Load-->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P3WXFWCW" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!--Interaction-->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8WD8WN" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div id="blazor-error-ui">
         <environment include="Staging,Production">
             An error has occurred. This application may no longer respond until reloaded.
