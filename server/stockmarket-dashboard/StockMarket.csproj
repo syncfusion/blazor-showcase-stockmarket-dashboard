@@ -1,9 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	<BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DefineConstants>Release</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <PackageReference Include="Syncfusion.Blazor" Version="32.1.19" />
+	  <PackageReference Include="Syncfusion.Blazor" Version="33.1.44" />
   </ItemGroup>
 
 </Project>
