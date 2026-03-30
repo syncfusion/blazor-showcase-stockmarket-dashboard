@@ -8,7 +8,7 @@ This stock market dashboard demo application exemplifies the seamless integratio
 
 * [System requirements](https://blazor.syncfusion.com/documentation/system-requirements/)
 
-* [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+* [.NET 10.0](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
 
 ## How to run the demo
 
@@ -20,7 +20,7 @@ Clone the repository.This repository contains Blazor Stockmarket Dashboard Serve
 * Open the command prompt from the demo's directory.
 * Run the demo using the following command.
    
-   To run .NET 8 Stockmarket Dashboard Server project
+   To run .NET 10 Stockmarket Dashboard Server project
    > `dotnet run --project server/StockMarket.csproj`
 
 ### Run the demo using Visual Studio
