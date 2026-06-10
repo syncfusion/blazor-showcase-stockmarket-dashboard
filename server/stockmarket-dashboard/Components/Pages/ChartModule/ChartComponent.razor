@@ -349,12 +349,12 @@
 
     public void Selected(CardData selectedCardData)
     {
-        if (!selectedCardData.StockName.Equals(CardService.PreviousCompareCardData.StockName))
+        if (CardService.PreviousCompareCardData == null || !selectedCardData.StockName.Equals(CardService.PreviousCompareCardData.StockName))
         {
             tempCardData = selectedCardData;
             SeriesName = selectedCardData.StockName;
             isStockSelected = true;
-            CardService.PreviousWatchlistCardData = selectedCardData;
+            CardService.PreviousCompareCardData = selectedCardData;
         }
     }
 
