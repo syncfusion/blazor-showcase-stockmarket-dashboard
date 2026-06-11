@@ -120,7 +120,7 @@ path[id*=_stockChart_chart_Series_] {
 }
 
 .e-dialog .e-dlg-header{
-    height: 24px;
+    height: auto;
 }
 
 .search {
