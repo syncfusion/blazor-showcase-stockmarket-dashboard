@@ -16,7 +16,17 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <PackageReference Include="Syncfusion.Blazor" Version="33.1.44" />
+	  <PackageReference Include="Syncfusion.Blazor.Charts" Version="*" />
+	  <PackageReference Include="Syncfusion.Blazor.Buttons" Version="*" />
+	  <PackageReference Include="Syncfusion.Blazor.Layouts" Version="*" />
+	  <PackageReference Include="Syncfusion.Blazor.Lists" Version="*" />
+	  <PackageReference Include="Syncfusion.Blazor.Navigations" Version="*" />
+	  <PackageReference Include="Syncfusion.Blazor.CircularGauge" Version="*" />
+	  <PackageReference Include="Syncfusion.Blazor.Inputs" Version="*" />
+	  <PackageReference Include="Syncfusion.Blazor.Popups" Version="*" />
+	  <PackageReference Include="Syncfusion.Blazor.StockChart" Version="*" />
+	  <PackageReference Include="Syncfusion.Blazor.Grid" Version="*" />
+	  <PackageReference Include="Syncfusion.Blazor.Themes" Version="*" />
   </ItemGroup>
 
 </Project>
