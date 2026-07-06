@@ -6,13 +6,14 @@
     background-color: #FAFAFA;
     overflow-y: hidden;
     user-select: none;
+    height: calc(100vh - 80px);
 }
 
 .column-80 {
     width: 75%;
     position: relative;
-    height: 100vh;
-    overflow-y: auto; 
+    height: calc(100vh - 80px);
+    overflow-y: auto;
 }
 
 .column-80::-webkit-scrollbar {

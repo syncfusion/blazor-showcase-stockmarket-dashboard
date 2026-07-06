@@ -560,8 +560,8 @@ namespace StockMarket.Data
                     StockCurrentPrice = GenerateCurrentStockPrice(0.2499, 0.6675),
                     UpDownPrice = 0.10,
                     UpDownPriceColor = "Green",
-                    StockType = "Crypto",
                     LastUpdate = $"Last update at {GenerateRandomTime()}",
+                    StockType = "Crypto",
                     SeriesChange = GenerateRandomSeriesChange()
                 },
                 new CardData
@@ -596,8 +596,8 @@ namespace StockMarket.Data
                     StockCurrentPrice = GenerateCurrentStockPrice(6.16, 17.22),
                     UpDownPrice = 1.00,
                     UpDownPriceColor = "Green",
-                    StockType = "Crypto",
                     LastUpdate = $"Last update at {GenerateRandomTime()}",
+                    StockType = "Crypto",
                     SeriesChange = GenerateRandomSeriesChange()
                 },
                 new CardData
