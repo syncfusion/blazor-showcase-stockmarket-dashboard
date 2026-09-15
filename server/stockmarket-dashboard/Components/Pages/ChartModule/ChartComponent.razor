@@ -11,7 +11,7 @@
     <div>
         <SfAppBar ColorMode="AppBarColor.Inherit">
             <span class="@StockImageClass">
-                <img src=@CardService.StockCardDetails.StockSymbol alt="stock_icon">
+                <img src=@CardService.StockCardDetails.StockSymbol alt="@CardService.StockCardDetails.StockName">
             </span>
 
             @if (CardService.IsMobileMode)
@@ -63,7 +63,7 @@
     <div class="@Stockheader">
         <SfAppBar ColorMode="AppBarColor.Inherit">
             <span class="@StockImageClass">
-                <img src=@CardService.StockCard.StockSymbol alt="stock_icon">
+                <img src=@CardService.StockCard.StockSymbol alt="@CardService.StockCard.StockName">
             </span>
             @if (CardService.IsMobileMode)
             {

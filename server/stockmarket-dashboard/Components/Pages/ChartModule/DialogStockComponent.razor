@@ -1,6 +1,6 @@
 ﻿@namespace StockMarket.Components.Pages
 <div @onclick="(e => Selected(Context))">
-    <img src="@(Context.StockSymbol)" class="e-avatar e-avatar-small e-avatar-circle" />
+    <img src="@(Context.StockSymbol)" alt="@Context.StockName" class="e-avatar e-avatar-small e-avatar-circle" />
     <div class="stock-info">
         <div class="namelist">@Context.StockName</div>
         <div class="subname">@Context.StockSubName</div>
